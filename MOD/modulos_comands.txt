@@ -1,0 +1,43 @@
+$Version de kernel
+uname -a
+
+#Instalar
+sudo apt-get install make gcc
+
+#Compilar el c
+make
+
+#Ver los modlos
+lsmod
+
+#Ver los archivos en lista
+ls -l
+
+#Agregar el modulo
+insmod modulo_cpu.ko
+
+#Eliminar modulo
+rmmod modulo_cpu
+
+#Ver modulo existente
+lsmod | grep modulo_cpu
+
+#RAM
+dmesg -C
+make clean
+rmmod ram_p1
+make
+insmod ram_p1.ko
+cat /proc/ram_p1
+dmesg
+ls -l ram_p1
+
+#CPU
+dmesg -C
+make clean
+rmmod cpu_p1
+make
+insmod cpu_p1.ko
+cat /proc/cpu_p1
+dmesg
+ls -l /proc/cpu_p1
