@@ -10,35 +10,35 @@ import (
 	"strconv"
 )
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+    (*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+    (*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+
 func homePage(w http.ResponseWriter, r *http.Request){
+	setupResponse(&w, r)
+	/*if (*req).Method == "OPTIONS" {
+		return
+	}*/
+
     fmt.Fprintf(w, "Welcome to the HomePage!")
     fmt.Println("Endpoint Hit: homePage")
 }
 
 func ram(w http.ResponseWriter, r *http.Request){
-	//file, err := os.Open("/modulos/ram_p")
+	setupResponse(&w, r)
 
     bytesLeidos, err := ioutil.ReadFile("/proc/ram_p1")
 	if err != nil {
 		fmt.Printf("Error leyendo archivo: %v", err)
 	}
 
-	/*contenido := string(bytesLeidos)
-	fmt.Println(contenido)
-
-	var d string
-	json.Unmarshal([]byte(contenido), &d)
-	fmt.Println(d)*/
-
-
 	var result map[string]interface{}
     json.Unmarshal([]byte(bytesLeidos), &result)
 
-    //fmt.Println(result["users"])
-
 	fmt.Println("Endpoint Hit: return ram")
 	json.NewEncoder(w).Encode(result)
-	//json.NewEncoder(w).Encode("{articulo: 'llego ram'}")
 }
 
 type Hijo struct {
@@ -72,6 +72,8 @@ type General struct {
 
 
 func procesos(w http.ResponseWriter, r *http.Request){
+	setupResponse(&w, r)
+
 	bytesLeidos, err := ioutil.ReadFile("/proc/cpu_p1")
 	if err != nil {
 		fmt.Printf("Error leyendo archivo: %v", err)
@@ -89,10 +91,6 @@ func procesos(w http.ResponseWriter, r *http.Request){
 	//json.NewEncoder(w).Encode("{articulo: 'llego procesos'}")
 }
 
-
-
-
-
 type Data struct {
 	Id           int
 }
@@ -103,6 +101,8 @@ type Send struct {
 }
 
 func kill(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
+
 	var d Data
 	if json.NewDecoder(r.Body).Decode(&d) != nil {
 		//println("CLIENTE: error 3")
@@ -142,7 +142,6 @@ func muerterio(id string) bool {
 		return true
 	}
 }
-
 
 
 func handleRequests() {
