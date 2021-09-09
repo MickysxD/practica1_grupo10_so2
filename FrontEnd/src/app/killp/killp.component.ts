@@ -18,10 +18,14 @@ export class KillpComponent implements OnInit {
       alert("inserte un id")
       return
     }
-    let ki = this.conngo.kill({id:parseInt(_id)})
+    let ki = this.conngo.kill(
+      {
+        id:parseInt(_id)
+      }
+    )
     ki.subscribe(res=>{
         let resultado = JSON.parse(JSON.stringify(res))
-        console.log(resultado.Result)
+        if(resultado.Result)alert("Se ejecuto correctamente el comando kill")
     })
   }
 

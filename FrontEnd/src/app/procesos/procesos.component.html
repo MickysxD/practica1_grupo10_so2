@@ -42,9 +42,9 @@
                 <td>{{proc.Nombre}}</td>
                 <td>{{proc.Estado}}</td>
                 <td>{{((proc.Uso/proc.Total)* 100).toFixed(2)}}</td>
-                <td>{{proc.Mem}}</td>
+                <td>{{(proc.Mem/1024).toFixed(2)}}</td>
                 <td>{{proc.Usuario}}</td>
-                <td *ngIf="es_hijo == 0" ><input type="button" class="btn" value="Ver hijos" (click)="ver_hijos(proc.Hijo)"></td>
+                <td *ngIf="es_hijo == 0 && proc.Hijo.length != 0" ><input type="button" class="btn" value="Ver hijos" (click)="ver_hijos(proc.Hijo)"></td>
             </tr>
         </table>
         <table *ngIf="es_hijo == 1" class="table">
