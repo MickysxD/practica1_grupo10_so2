@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="red">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-panel">
+        <br><br><br><br><br><br><br><br>
+        <div class="main-content">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-chart">
+                        <div class="card-header" style="text-align: center;">
+                            <h4 class="card-title">Kill process</h4>
+                            <hr>
+                        </div>
+                        <div class="card-body" style="text-align: center;">
+                            <input type="text" #id placeholder="Ingrese el id del proceso">
+                            <br>
+                            <input type="button" class="btn" (click)="kill(id.value)" value="Kill process">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

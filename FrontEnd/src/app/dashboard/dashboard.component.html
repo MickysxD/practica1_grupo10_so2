@@ -1,0 +1,43 @@
+<hr style="max-height: 5px;">
+
+<h3>Monitoreo en tiempo real</h3>
+<hr><br><br><br>
+<div class="main-content">
+  <div class="row">
+    <div class="col-sm-7">
+
+      <div class="panel-header panel-header-lg" style="max-width: 700px;">
+        <canvas baseChart id="bigDashboardChart" [datasets]="lineBigDashboardChartData"
+          [labels]="lineBigDashboardChartLabels" [colors]="lineBigDashboardChartColors"
+          [options]="lineBigDashboardChartOptions" [chartType]="lineBigDashboardChartType"
+          (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+  
+  <div class="col-sm-4">
+    <div class="row">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Total de memoria RAM:  {{total_ram.toFixed(0)}} Mb</h4>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Total de RAM Consumida: {{total_ram_consumida.toFixed(0)}} Mb</h4>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h4 class="card-title">Porcentaje de consumo: {{porcentaje_consumo.toFixed(0)}}%</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div><br><hr>
