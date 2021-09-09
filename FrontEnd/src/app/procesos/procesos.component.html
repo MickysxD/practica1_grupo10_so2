@@ -1,0 +1,61 @@
+<div class="wrapper">
+    <div class="sidebar" data-color="red">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-panel">
+        
+        <br>
+        <h5>Administrador de Procesos</h5>
+        <table class="table">
+            <tr>
+                <td>Total de procesos</td>
+                <td>Procesos en ejecución</td>
+                <td>Procesos suspendidos</td>
+                <td>Procesos detenidos</td>
+                <td>Procesos zombies</td>
+            </tr>
+            <tr>
+                <td>{{cpu.Datos.Total}}</td>
+                <td>{{cpu.Datos.Ejecucion}}</td>
+                <td>{{cpu.Datos.Suspendido}}</td>
+                <td>{{cpu.Datos.Detenido}}</td>
+                <td>{{cpu.Datos.Zombie}}</td>
+            </tr>
+        </table>
+        <hr>
+        <hr>
+        
+        <h5>Arbol de Procesos</h5>
+        <button *ngIf="es_hijo == 1" class="btn" (click)="regresar()">Regresar</button>
+        <table *ngIf="es_hijo == 0" class="table">
+            <tr>
+                <td>PID</td>
+                <td>Nombre</td>
+                <td>Estado</td>
+                <td>%RAM</td>
+                <td>Task Codesize</td>
+                <td>Usuario</td>
+                <td>Ver hijos</td>
+            </tr>
+            <tr *ngFor="let proc of procesos">
+                <td>{{proc.Pid}}</td>
+                <td>{{proc.Nombre}}</td>
+                <td>{{proc.Estado}}</td>
+                <td>{{((proc.Uso/proc.Total)* 100).toFixed(2)}}</td>
+                <td>{{proc.Mem}}</td>
+                <td>{{proc.Usuario}}</td>
+                <td *ngIf="es_hijo == 0" ><input type="button" class="btn" value="Ver hijos" (click)="ver_hijos(proc.Hijo)"></td>
+            </tr>
+        </table>
+        <table *ngIf="es_hijo == 1" class="table">
+            <tr>
+                <td>PID</td>
+                <td>Nombre</td>
+            </tr>
+            <tr *ngFor="let proc of procesos_hijo">
+                <td>{{proc.Pid}}</td>
+                <td>{{proc.Nombre}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
