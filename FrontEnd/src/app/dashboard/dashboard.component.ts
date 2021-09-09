@@ -85,10 +85,10 @@ export class DashboardComponent implements OnInit {
         let ram = JSON.parse(JSON.stringify(res))
         let random = this.getRandomArbitrary(0, ram.total)
         this.total_ram = ram.total
-        this.total_ram_consumida = random
-        this.porcentaje_consumo = (random/ram.total)*100
+        this.total_ram_consumida = ram.uso
+        this.porcentaje_consumo = (ram.uso/ram.total)*100
         this.ordenar()
-        this.lista[3] = random
+        this.lista[3] = ram.uso
         this.update()
       }
     })
